@@ -8,14 +8,14 @@
           <div class="card-header d-flex">
             Lista dei post
 
-            <a class="ms-auto" href="#">Aggiungi...</a>
+            <a class="ms-auto" href="{{ route('admin.posts.create') }}">Aggiungi...</a>
           </div>
 
           <div class="card-body">
             <ul class="list-group">
-              @foreach ($data as $item)
+              @foreach ($posts as $post)
                 <li class="list-group-item">
-                  {{$item->name}}
+                  {{$post->title}}
                 </li>
               @endforeach
             </ul>

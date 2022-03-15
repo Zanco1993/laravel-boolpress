@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -15,8 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $data = Post::all();
-        return view('admin.posts.index', compact('data'));
+        $posts = Post::all();
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -26,7 +27,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        // questa funzione ci manda alla pagina del form per aggiungere i dati
+        return view('admin.posts.create');
     }
 
     /**
@@ -37,7 +39,35 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validazioni dati inseriti dall'utente
+        $data = $request->validate([
+            'title' => 'required|max:20',
+            'content' => 'required|min:10'
+        ]);
+        // nel model vado a creare la variabile $fillable che eseguirà per noi un'istanza degli
+        // elementi presenti nell'array, quindi il nome delle colonne
+        $post = new Post();
+        $post->fill($data);
+        // prima di eseguire il save, creo lo slug
+        $slug = Str::slug($post->title);
+        $exists = Post::where("slug", $slug)->first();
+        $counter = 1;
+
+        while ($exists) {
+            $newSlug = $slug . "-" . $counter;
+            $counter++;
+
+            $exists = Post::where("slug", $newSlug)->first();
+
+            if (!$exists) {
+                $slug = $newSlug;
+            }
+        }
+        $post->slug = $slug;
+
+        $post->save();
+
+        return redirect()->route('admin.posts.index');
     }
 
     /**
