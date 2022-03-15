@@ -28,8 +28,8 @@
             @endif
           @else
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('admin.students.index') }}" role="button">
-                Students
+              <a class="nav-link" href="{{ route('admin.posts.index') }}" role="button">
+                Posts
               </a>
             </li>
   

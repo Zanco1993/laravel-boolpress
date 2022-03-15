@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <form method="POST" action="{{ route('admin.students.store') }}">
+    <form method="POST" action="{{ route('admin.posts.store') }}">
 
 
         <div class="form-group mb-3">

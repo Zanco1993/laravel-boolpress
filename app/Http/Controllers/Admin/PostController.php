@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Student;
+use App\Post;
 use Illuminate\Http\Request;
 
-class StudentController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $data = Student::all();
-        return view('admin.students.index', compact('data'));
+        $data = Post::all();
+        return view('admin.posts.index', compact('data'));
     }
 
     /**
@@ -26,7 +26,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('admin.students.create');
+        //
     }
 
     /**
@@ -37,11 +37,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|min:3'
-        ]);
-        $person = new Student();
-        $person->fill($data);
+        //
     }
 
     /**

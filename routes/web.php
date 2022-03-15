@@ -25,7 +25,7 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/', 'HomeController@index')->name('home');
 
-        Route::resource('students', 'StudentController');
+        Route::resource('posts', 'PostController');
     
     });
 

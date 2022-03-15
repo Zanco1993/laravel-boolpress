@@ -8,7 +8,7 @@
           <div class="card-header d-flex">
             Lista dei post
 
-            <a class="ms-auto" href="{{ route('admin.students.create') }}">Aggiungi...</a>
+            <a class="ms-auto" href="#">Aggiungi...</a>
           </div>
 
           <div class="card-body">
