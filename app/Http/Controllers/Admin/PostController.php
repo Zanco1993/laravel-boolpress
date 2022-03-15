@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -28,7 +29,9 @@ class PostController extends Controller
     public function create()
     {
         // questa funzione ci manda alla pagina del form per aggiungere i dati
-        return view('admin.posts.create');
+        $categories = Category::all();
+
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -42,7 +45,9 @@ class PostController extends Controller
         // validazioni dati inseriti dall'utente
         $data = $request->validate([
             'title' => 'required|max:20',
-            'content' => 'required|min:10'
+            'content' => 'required|min:10',
+            'user_id' => 'nullable',
+            'category_id' => 'nullable'
         ]);
         // nel model vado a creare la variabile $fillable che eseguirà per noi un'istanza degli
         // elementi presenti nell'array, quindi il nome delle colonne
@@ -95,7 +100,13 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+
+        return view("admin.posts.edit", [
+            "post" => $post,
+            "categories" => $categories
+        ]);
+        
     }
 
     /**
@@ -107,16 +118,18 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-         // validazioni dati inseriti dall'utente
-         $data = $request->validate([
+        // validazioni dati inseriti dall'utente
+        $data = $request->validate([
             'title' => 'required|max:20',
-            'content' => 'required|min:10'
+            'content' => 'required|min:10',
+            'user_id' => 'nullable',
+            'category_id' => 'nullable'
         ]);
 
         $post = Post::findOrFail($id);
         $post->fill($data);
 
-        
+
 
         $slug = Str::slug($post->title);
         $exists = Post::where("slug", $slug)->first();
@@ -138,7 +151,6 @@ class PostController extends Controller
         $post->save();
 
         return redirect()->route('admin.posts.show', $post->id);
-    
     }
 
     /**
