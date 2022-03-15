@@ -21,6 +21,17 @@
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
 
+        <div class="mb-3">
+            <label>Categoria</label>
+            <select name="category_id" class="form-select">
+              <option value="">-- nessuna categoria --</option>
+              @foreach ($categories as $category)
+                <option value="{{ $category->id }}" @if (old('category_id')=== $category->id) selected @endIf>
+                  {{ $category->name }}</option>
+              @endforeach
+            </select>
+          </div>
+
         {{-- lo slug sarà una procedura interna eseguita nelle function che conservano le informazioni --}}
         
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -46,7 +46,6 @@ class PostController extends Controller
         $data = $request->validate([
             'title' => 'required|max:20',
             'content' => 'required|min:10',
-            'user_id' => 'nullable',
             'category_id' => 'nullable'
         ]);
         // nel model vado a creare la variabile $fillable che eseguirà per noi un'istanza degli
@@ -122,7 +121,6 @@ class PostController extends Controller
         $data = $request->validate([
             'title' => 'required|max:20',
             'content' => 'required|min:10',
-            'user_id' => 'nullable',
             'category_id' => 'nullable'
         ]);
 

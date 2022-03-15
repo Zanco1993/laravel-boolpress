@@ -23,6 +23,8 @@
               Data ultima modifica: {{ $post->updated_at }}
               <br>
               Slug: {{ $post->slug }}
+              <br>
+              Categoria: {{ $post->category->name }} 
             </div>
 
           </div>
