@@ -14,17 +14,22 @@ class AddForeignInPostTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger("user_id")
-                ->after("slug");
-            $table->foreign("user_id")
-                ->references("id")
-                ->on("users");
+            $table->unsignedBigInteger("user_id");
 
 
+      
+            $table->foreign("user_id") // indichiamo che user_id è una foreign key
+              ->references("id") // indichiamo che fa riferimento alla colonna id
+              ->on("users"); // sulla tabella users
+      
+            // Versione più stitica
+            // per forza di cose, il nome della colonna dovrà contenere il nome della tabella
+            // di destinazione al singolare più il nome della colonna a cui fa riferimento.
             $table->foreignId("category_id")
-                ->after("user_id")
-                ->constrained();
-        });
+
+
+              ->constrained();
+          });
     }
 
     /**
