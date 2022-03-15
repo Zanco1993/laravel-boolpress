@@ -19,8 +19,16 @@
                   {{ $post->title }}
                 </div>
 
-                <a class="ms-auto" href="{{ route('admin.posts.show', $post->id) }}">Dettagli</a>
+                <a class="btn btn-warning ms-auto" href="{{ route('admin.posts.show', $post->id) }}">Dettagli</a>
+                <div class="px-2">
+                  <form method="POST" action="{{ route('admin.posts.destroy', $post->id) }}">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Elimina</button>
+                  </form>
+                </div>
               </li>
+              
               @endforeach
             </ul>
           </div>
