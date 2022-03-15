@@ -14,9 +14,13 @@
           <div class="card-body">
             <ul class="list-group">
               @foreach ($posts as $post)
-                <li class="list-group-item">
-                  {{$post->title}}
-                </li>
+              <li class="list-group-item d-flex align-items-center">
+                <div>
+                  {{ $post->title }}
+                </div>
+
+                <a class="ms-auto" href="{{ route('admin.posts.show', $post->id) }}">Dettagli</a>
+              </li>
               @endforeach
             </ul>
           </div>

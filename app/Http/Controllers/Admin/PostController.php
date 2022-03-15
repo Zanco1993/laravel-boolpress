@@ -78,7 +78,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        // usande lo $slug, non possiamo usare il findOrFail come si faceva con l'ID
+        // $post = Post::where("slug", $slug)->first();
+
+        // in questo caso, preferisco usare l'ID
+        $post = Post::findOrFail($id);
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -89,7 +94,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -101,7 +107,38 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         // validazioni dati inseriti dall'utente
+         $data = $request->validate([
+            'title' => 'required|max:20',
+            'content' => 'required|min:10'
+        ]);
+
+        $post = Post::findOrFail($id);
+        $post->fill($data);
+
+        
+
+        $slug = Str::slug($post->title);
+        $exists = Post::where("slug", $slug)->first();
+        $counter = 1;
+
+        while ($exists) {
+            $newSlug = $slug . "-" . $counter;
+            $counter++;
+
+            $exists = Post::where("slug", $newSlug)->first();
+
+            if (!$exists) {
+                $slug = $newSlug;
+            }
+        }
+        $post->slug = $slug;
+
+        $post->update($data);
+        $post->save();
+
+        return redirect()->route('admin.posts.show', $post->id);
+    
     }
 
     /**
