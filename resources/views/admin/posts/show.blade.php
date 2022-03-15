@@ -26,7 +26,9 @@
               <br>
               {{-- entro nell'istanza di post, nel model l'ho collegata a category, quindi 
               in questa maniera recuperiamo i dati di category --}}
-              Categoria: {{ $post->category->name }}
+
+              Il genere del post è: {{ isset($post->category) ? $post->category->name : "Nessuna categoria" }}
+
             </div>
 
           </div>
