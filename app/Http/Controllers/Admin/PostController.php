@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -17,7 +18,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all();
+        // voglio solo i post dell'utente che è loggato quindi
+        // tramite l'interrogazione where, filtro solo l'utente loggato
+        $posts = Post::where('user_id', Auth::user()->id)->get();
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -68,6 +72,9 @@ class PostController extends Controller
             }
         }
         $post->slug = $slug;
+        // MOLTO IMPORTANTE
+        // andiamo a prendere l'ID dell'utente loggato prima del save
+        $post->user_id = Auth::user()->id;
 
         $post->save();
 

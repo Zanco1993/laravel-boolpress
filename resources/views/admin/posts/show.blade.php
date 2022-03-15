@@ -24,7 +24,9 @@
               <br>
               Slug: {{ $post->slug }}
               <br>
-              Categoria: {{ $post->category->name }} 
+              {{-- entro nell'istanza di post, nel model l'ho collegata a category, quindi 
+              in questa maniera recuperiamo i dati di category --}}
+              Categoria: {{ $post->category->name }}
             </div>
 
           </div>

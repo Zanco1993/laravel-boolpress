@@ -16,7 +16,15 @@
               @foreach ($posts as $post)
               <li class="list-group-item d-flex align-items-center">
                 <div>
-                  {{ $post->title }}
+                  <p>Il creatore del contenuto è: {{ $post->user->name }}</p>
+                  <p>Il titolo del post è: {{ $post->title }}</p>
+
+                    <div>
+                      {{-- se esiste la variabile $post->category allora mostra il suo valore altrimenti scrivi Nessuna categoria --}}
+                      Il genere del post è: {{ isset($post->category) ? $post->category->name : "Nessuna categoria" }}
+                    </div>
+
+
                 </div>
 
                 <a class="btn btn-warning ms-auto" href="{{ route('admin.posts.show', $post->id) }}">Dettagli</a>
