@@ -16,7 +16,6 @@ class AddForeignInPostTable extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->foreignId('user_id')
                 ->after('slug')
-                ->nullable()
                 ->constrained();
       
            
