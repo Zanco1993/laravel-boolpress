@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -34,8 +35,9 @@ class PostController extends Controller
     {
         // questa funzione ci manda alla pagina del form per aggiungere i dati
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.posts.create', compact('categories'));
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -50,7 +52,8 @@ class PostController extends Controller
         $data = $request->validate([
             'title' => 'required|max:20',
             'content' => 'required|min:10',
-            'category_id' => 'nullable'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ]);
         // nel model vado a creare la variabile $fillable che eseguirà per noi un'istanza degli
         // elementi presenti nell'array, quindi il nome delle colonne
@@ -77,6 +80,9 @@ class PostController extends Controller
         $post->user_id = Auth::user()->id;
 
         $post->save();
+        if (key_exists('tags', $data)) {
+            $post->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.index');
     }
@@ -107,12 +113,16 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $categories = Category::all();
+        $tags = Tag::all();
+
 
         return view("admin.posts.edit", [
             "post" => $post,
-            "categories" => $categories
+            "categories" => $categories,
+            "tags" => $tags
         ]);
-        
+        // passo anche i dati di tags
+
     }
 
     /**
@@ -128,13 +138,11 @@ class PostController extends Controller
         $data = $request->validate([
             'title' => 'required|max:20',
             'content' => 'required|min:10',
-            'category_id' => 'nullable'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id'
         ]);
 
         $post = Post::findOrFail($id);
-        $post->fill($data);
-
-
 
         $slug = Str::slug($post->title);
         $exists = Post::where("slug", $slug)->first();
@@ -153,7 +161,11 @@ class PostController extends Controller
         $post->slug = $slug;
 
         $post->update($data);
-        $post->save();
+
+        // inserisco questa condizione perchè il valore potrebbe essere nullo
+        if (key_exists('tags', $data)) {
+            $post->tags()->sync($data['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $post->id);
     }
@@ -167,6 +179,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+        $post->tags()->detach();
         $post->delete();
         return redirect()->route('admin.posts.index');
     }

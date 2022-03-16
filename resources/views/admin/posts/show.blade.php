@@ -29,7 +29,14 @@
 
               Il genere del post è: {{ isset($post->category) ? $post->category->name : "Nessuna categoria" }}
 
-            </div>
+              @if ($post->tags !== null)
+              <div class="my-3">
+                tags:
+                @foreach ($post->tags as $tag)
+                  <span class="bg-light">{{ $tag->name }}</span>
+                @endforeach
+              </div>
+            @endif
 
           </div>
         </div>

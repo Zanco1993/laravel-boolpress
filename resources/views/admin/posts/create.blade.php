@@ -32,6 +32,19 @@
             </select>
           </div>
 
+          <div class="mb-3">
+            <label>Tags</label>
+            @foreach ($tags as $tag)
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ $tag->id }}" id="{{ $tag->id }}">
+                <label class="form-check-label" for="{{ $tag->id }}">
+                  {{ $tag->name }}
+                </label>
+            </div>
+            @endforeach
+            
+          </div>
+
         {{-- lo slug sarà una procedura interna eseguita nelle function che conservano le informazioni --}}
         
         <button type="submit" class="btn btn-primary">Submit</button>

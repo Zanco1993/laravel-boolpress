@@ -23,6 +23,11 @@
                       {{-- se esiste la variabile $post->category allora mostra il suo valore altrimenti scrivi Nessuna categoria --}}
                       Il genere del post è: {{ isset($post->category) ? $post->category->name : "Nessuna categoria" }}
                     </div>
+                    <br>
+                    <div>
+                      {{-- se esiste la variabile $post->tag allora mostra il suo valore altrimenti scrivi Nessun tag --}}
+                      Il tag del post è: {{ isset($post->tag) ? $post->tag->name : "Nessun tag" }}
+                    </div>
 
 
                 </div>
