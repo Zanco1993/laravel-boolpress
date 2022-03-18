@@ -17,7 +17,7 @@
               <li class="list-group-item d-flex align-items-center">
                 <div>
                   <p>Il creatore del contenuto è: {{ $post->user->name }}</p>
-                  <p>Il titolo del post è: {{ $post->title }}</p>
+                    <p>Il titolo del post è: {{ $post->title }}</p>
 
                     <div>
                       {{-- se esiste la variabile $post->category allora mostra il suo valore altrimenti scrivi Nessuna categoria --}}
@@ -41,7 +41,7 @@
                   </form>
                 </div>
               </li>
-              
+
               @endforeach
             </ul>
           </div>

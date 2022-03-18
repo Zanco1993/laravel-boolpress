@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index');
-Route::get('/home', 'HomeController@index');
+//Route::get('/', 'HomeController@index');
+//Route::get('/home', 'HomeController@index');
 
 Auth::routes();
 
@@ -28,9 +28,9 @@ Route::middleware('auth')
 
         Route::resource('posts', 'PostController');
         Route::resource('users', 'UserController');
-    
     });
 
-Route::get("{any}", function() {
-    return view('home');
+    
+Route::get("{any?}", function () {
+    return view("home");
 })->where("any", ".*");
