@@ -21,4 +21,4 @@ use Illuminate\Support\Facades\Route;
 //});
 
 
-Route::get('/posts', 'Api\PostController@index');
+Route::resource('/posts', 'Api\PostController');
