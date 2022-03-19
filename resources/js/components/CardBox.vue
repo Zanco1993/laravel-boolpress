@@ -1,6 +1,9 @@
 <template>
   <div class="row">
-    <card v-for="post in posts" :key="post.id" :post="post"></card>
+    <!-- nella chiamata axios ho inserito in un unico array, le informazioni di
+    pagination e data.
+    Per questo motivo per accedere all'informazione di post, l'array sarà posts.data -->
+    <card v-for="post in posts.data" :key="post.id" :post="post"></card>
   </div>
 </template>
 
