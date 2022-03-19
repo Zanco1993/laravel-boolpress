@@ -53,7 +53,8 @@ class PostController extends Controller
             'title' => 'required|max:20',
             'content' => 'required|min:10',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'img' => 'nullable'
         ]);
         // nel model vado a creare la variabile $fillable che eseguirà per noi un'istanza degli
         // elementi presenti nell'array, quindi il nome delle colonne

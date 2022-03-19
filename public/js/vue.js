@@ -1929,6 +1929,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     post: Object
@@ -2541,12 +2542,12 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card-deck col-3" }, [
+  return _c("div", { staticClass: "card-deck col-3 mb-5" }, [
     _c("div", { staticClass: "card" }, [
       _c("img", {
         staticClass: "card-img-top",
         attrs: {
-          src: "https://via.placeholder.com/150",
+          src: _vm.post.img ? _vm.post.img : "https://via.placeholder.com/150",
           alt: "Card image cap",
         },
       }),
@@ -2559,6 +2560,8 @@ var render = function () {
         _c("p", { staticClass: "card-text" }, [
           _vm._v("\n          " + _vm._s(_vm.post.content) + "\n        "),
         ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("Autore: " + _vm._s(_vm.post.user.name))]),
         _vm._v(" "),
         _c("p", { staticClass: "card-text" }, [
           _c("small", { staticClass: "text-muted" }, [

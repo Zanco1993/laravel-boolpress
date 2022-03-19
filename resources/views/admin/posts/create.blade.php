@@ -43,7 +43,13 @@
             </div>
             @endforeach
             
+            <div class="form-group mb-3">
+              <label class="mb-3">Image</label>
+              <input type="text" class="form-control @error('img') is-invalid @enderror" name="img" placeholder="Inserisci url image">
           </div>
+          @error('img')
+              <div class="invalid-feedback">{{ $message }}</div>
+          @enderror
 
         {{-- lo slug sarà una procedura interna eseguita nelle function che conservano le informazioni --}}
         

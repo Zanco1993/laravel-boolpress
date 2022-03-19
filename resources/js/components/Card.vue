@@ -1,9 +1,9 @@
 <template>
-  <div class="card-deck col-3">
+  <div class="card-deck col-3 mb-5">
       <div class="card">
         <img
           class="card-img-top"
-          src="https://via.placeholder.com/150"
+          :src="post.img ? post.img : 'https://via.placeholder.com/150'"
           alt="Card image cap"
         />
         <div class="card-body">
@@ -11,6 +11,7 @@
           <p class="card-text">
             {{ post.content }}
           </p>
+          <p>Autore: {{ post.user.name }}</p>
           <p class="card-text">
             <small class="text-muted">Aggiornato {{ post.updated_at }}</small>
           </p>

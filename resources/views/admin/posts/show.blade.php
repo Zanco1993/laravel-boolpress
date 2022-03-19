@@ -40,9 +40,13 @@
               @if ($post->tags !== null)
               <div class="my-3">
                 tags:
+                @if($post->tag)
                 @foreach ($post->tags as $tag)
                   <span class="bg-light">{{ $tag->name }}</span>
                 @endforeach
+                @else
+                  <span>Nessun tag</span>
+                @endif
               </div>
             @endif
 

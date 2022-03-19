@@ -45,8 +45,15 @@
                 </label>
             </div>
             @endforeach
-            
           </div>
+
+          <div class="form-group mb-3">
+            <label class="mb-3">Image</label>
+            <input type="text" class="form-control @error('img') is-invalid @enderror" name="img" placeholder="Inserisci url image">
+        </div>
+        @error('img')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
 
         
         <button type="submit" class="btn btn-warning">Clicca per modificare</button>
