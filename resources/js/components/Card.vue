@@ -13,7 +13,7 @@
           </p>
           <p>Autore: {{ post.user.name }}</p>
           <p class="card-text">
-            <small class="text-muted">Aggiornato {{ post.updated_at }}</small>
+            <small class="text-muted">Aggiornato il {{ formatDate(post.updated_at) }}</small>
           </p>
         </div>
       </div>
@@ -21,10 +21,17 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 export default {
 props: {
     post: Object
 },
+
+methods: {
+  formatDate(date) {
+    return dayjs(date).format("DD/MM/YYYY HH:mm");
+  }
+}
 }
 </script>
 
