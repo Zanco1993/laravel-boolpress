@@ -2064,27 +2064,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/App.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/App.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/navbar.vue */ "./resources/js/components/navbar.vue");
-/* harmony import */ var _components_CardBox_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/CardBox.vue */ "./resources/js/components/CardBox.vue");
+/* harmony import */ var _components_CardBox_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/CardBox.vue */ "./resources/js/components/CardBox.vue");
 //
 //
 //
@@ -2128,13 +2110,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    navbar: _components_navbar_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    CardBox: _components_CardBox_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    CardBox: _components_CardBox_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -2174,6 +2163,32 @@ __webpack_require__.r(__webpack_exports__);
         _this3.posts = resp.data;
       });
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/App.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/App.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_navbar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/navbar.vue */ "./resources/js/components/navbar.vue");
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    navbar: _components_navbar_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -2881,7 +2896,91 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "container py-5" },
+      [
+        _c("h1", { staticClass: "text-center" }, [_vm._v("Box Card")]),
+        _vm._v(" "),
+        _c("card-box", { attrs: { posts: _vm.posts } }),
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", [
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
+            _c("li", { staticClass: "page-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { "aria-label": "Previous" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.scrollerPost(_vm.posts.current_page - 1)
+                    },
+                  },
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("«"),
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.posts.last_page, function (page) {
+              return _c("li", { key: page, staticClass: "page-item" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function ($event) {
+                        return _vm.currentPages(page)
+                      },
+                    },
+                  },
+                  [_vm._v(_vm._s(page))]
+                ),
+              ])
+            }),
+            _vm._v(" "),
+            _c("li", { staticClass: "page-item" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "page-link",
+                  attrs: { "aria-label": "Next" },
+                  on: {
+                    click: function ($event) {
+                      return _vm.scrollerPost(_vm.posts.current_page + 1)
+                    },
+                  },
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("»"),
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "sr-only" }, [_vm._v("Next")]),
+                ]
+              ),
+            ]),
+          ],
+          2
+        ),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -2905,99 +3004,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("navbar"),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "container py-5" },
-        [
-          _c("h1", { staticClass: "text-center" }, [_vm._v("Box Card")]),
-          _vm._v(" "),
-          _c("card-box", { attrs: { posts: _vm.posts } }),
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", [
-        _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-          _c(
-            "ul",
-            { staticClass: "pagination" },
-            [
-              _c("li", { staticClass: "page-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "page-link",
-                    attrs: { "aria-label": "Previous" },
-                    on: {
-                      click: function ($event) {
-                        return _vm.scrollerPost(_vm.posts.current_page - 1)
-                      },
-                    },
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("«"),
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "sr-only" }, [
-                      _vm._v("Previous"),
-                    ]),
-                  ]
-                ),
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.posts.last_page, function (page) {
-                return _c("li", { key: page, staticClass: "page-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function ($event) {
-                          return _vm.currentPages(page)
-                        },
-                      },
-                    },
-                    [_vm._v(_vm._s(page))]
-                  ),
-                ])
-              }),
-              _vm._v(" "),
-              _c("li", { staticClass: "page-item" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "page-link",
-                    attrs: { "aria-label": "Next" },
-                    on: {
-                      click: function ($event) {
-                        return _vm.scrollerPost(_vm.posts.current_page + 1)
-                      },
-                    },
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("»"),
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "sr-only" }, [_vm._v("Next")]),
-                  ]
-                ),
-              ]),
-            ],
-            2
-          ),
-        ]),
-      ]),
-    ],
-    1
-  )
+  return _c("div", [_c("navbar"), _vm._v(" "), _c("router-view")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
