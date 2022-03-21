@@ -15,6 +15,9 @@ export default {
   components: {
     Card
   },
+  props: {
+    posts: Array
+  }
   
 };
 </script>
