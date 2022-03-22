@@ -25,7 +25,8 @@
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/login"> Admin </a>
+            <a class="nav-link" href="/login" v-if="!user"> Login </a>
+            <a class="nav-link" href="/admin" v-if="user"> {{ user.name }} </a>
           </li>
         </ul>
       </div>
@@ -34,11 +35,13 @@
 </template>
 
 <script>
+import axios from "axios";
 import router from "../router";
 export default {
   data() {
     return {
       routes: [],
+      user: null
     };
   },
   mounted() {
@@ -46,7 +49,16 @@ export default {
       .getRoutes()
       .filter((route) => route.meta.linktext);
     // console.log(this.routes);
+
+    this.getNameUser();
   },
+  methods: {
+    getNameUser() {
+      axios.get('http://127.0.0.1:8000/api/user').then((resp) => {
+        this.user = resp.data
+      })
+    }
+  }
 };
 </script>
 
