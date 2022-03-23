@@ -14,13 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// commentiamo momentaneamente la parte di utente loggato
 
 Route::middleware('auth')->get('/user', function (Request $request) {
-   return $request->user();
+    return $request->user();
 });
 
 
-Route::resource('/posts', 'Api\PostController');
+Route::resource('posts', 'Api\PostController');
 
 Route::resource('contacts', 'Api\ContactController');

@@ -8,6 +8,7 @@ use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -43,7 +44,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -54,10 +55,11 @@ class PostController extends Controller
             'content' => 'required|min:10',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id',
-            'img' => 'nullable'
+            'img' => 'nullable|image|max:500'
         ]);
         // nel model vado a creare la variabile $fillable che eseguirà per noi un'istanza degli
         // elementi presenti nell'array, quindi il nome delle colonne
+
         $post = new Post();
         $post->fill($data);
         // prima di eseguire il save, creo lo slug
@@ -85,13 +87,22 @@ class PostController extends Controller
             $post->tags()->sync($data['tags']);
         }
 
+        if (key_exists('img', $data)) {
+            if ($post->img) {
+                Storage::delete($post->img);
+            }
+            $img = Storage::put('uploads', $data['img']);
+            $post->img = $img;
+            $post->save();
+        }
+
         return redirect()->route('admin.posts.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -107,11 +118,12 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
+
         $post = Post::findOrFail($id);
         $categories = Category::all();
         $tags = Tag::all();
@@ -122,15 +134,14 @@ class PostController extends Controller
             "categories" => $categories,
             "tags" => $tags
         ]);
-        // passo anche i dati di tags
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -140,9 +151,9 @@ class PostController extends Controller
             'title' => 'required|max:20',
             'content' => 'required|min:10',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags,id'
+            'tags' => 'nullable|exists:tags,id',
+            'img' => 'nullable|image|max:500'
         ]);
-
         $post = Post::findOrFail($id);
 
         $slug = Str::slug($post->title);
@@ -167,6 +178,14 @@ class PostController extends Controller
         if (key_exists('tags', $data)) {
             $post->tags()->sync($data['tags']);
         }
+        if (key_exists('img', $data)) {
+            if ($post->img) {
+                Storage::delete($post->img);
+            }
+            $img = Storage::put('uploads', $data['img']);
+            $post->img = $img;
+            $post->save();
+        }
 
         return redirect()->route('admin.posts.show', $post->id);
     }
@@ -174,13 +193,16 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
         $post->tags()->detach();
+        if ($post->img) {
+            Storage::delete($post->img);
+        }
         $post->delete();
         return redirect()->route('admin.posts.index');
     }
