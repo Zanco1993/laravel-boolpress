@@ -10,8 +10,7 @@
 </head>
 
 <body>
-<h1>Nuovo messaggio</h1>
-
+<h1>Benvenuto {{ ucfirst($newContactInfo->name) }}</h1>
 </body>
 
 </html>

@@ -48,7 +48,7 @@ class ContactController extends Controller
         $newContact->save();
 
         // una volta che l'utente si è registrato, inviamo l'email di benvenuto
-        Mail::to('destinatario@gmail.com')->send(new SendNewMail());
+        Mail::to('destinatario@gmail.com')->send(new SendNewMail($newContact));
         return response()->json($newContact);
 
     }
