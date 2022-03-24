@@ -39,27 +39,25 @@
 
                             Il genere del post
                             è: {{ isset($post->category) ? $post->category->name : "Nessuna categoria" }}
-                            @if ($post->tags !== null)
-                                <div class="my-3">
-                                    tags:
-                                    @if($post->tag)
-                                        @foreach ($post->tags as $tag)
-                                            <span class="bg-light">{{ $tag->name }}</span>
-                                        @endforeach
-                                    @else
-                                        <span>Nessun tag</span>
-                                    @endif
-                                </div>
-                            @endif
-                            @if ($post->img !== null)
-                                <div class="my-3">
-                                    @if($post->img)
-                                        <img src="{{asset('storage/' . $post->img)}}" alt="">
-                                    @else
-                                        <span>Nessuna immagine</span>
-                                    @endif
-                                </div>
-                            @endif
+                            <div class="my-3">
+                                tags:
+                                @if($post->tag)
+                                    @foreach ($post->tags as $tag)
+                                        <span class="bg-light">{{ $tag->name }}</span>
+                                    @endforeach
+                                @else
+                                    <span>Nessun tag</span>
+                                @endif
+                            </div>
+
+                            <div class="my-3">
+                                @if($post->img)
+                                    <img src="{{asset('storage/' . $post->img)}}" alt="">
+                                @else
+                                    <span>Nessuna immagine</span>
+                                @endif
+                            </div>
+
 
                         </div>
                     </div>
